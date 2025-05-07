@@ -95,7 +95,7 @@ export default function RequireInstall({ children }: Props) {
               setShowOverlay(false);
             }
           }}
-          className="px-6 py-3 bg-green-600 hover:bg-green-700 rounded text-lg"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded text-lg"
         >
           Install App
         </button>

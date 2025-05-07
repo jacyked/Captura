@@ -9,13 +9,15 @@ const { parse } = require('url');
 const dev = false;
 const hostname = process.env.HOST;         //Host LAN IP
 const port = process.env.PORT;
+const certkey = process.env.KEY;
+const certpem = process.env.PEM;
 
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
 const sslOptions = {
-  key:  fs.readFileSync('localhost+1-key.pem'),
-  cert: fs.readFileSync('localhost+1.pem'),
+  key:  fs.readFileSync(certkey),
+  cert: fs.readFileSync(certpem),
 };
 
 app.prepare().then(() => {

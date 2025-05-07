@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a Next.JS PWA built to upload photos to a shared network drive connected to the server host. 
 
-## Getting Started
+To get started:
 
-First, run the development server:
+1. Install Node.js version 20 or higher + npm or your package manager of choice.
+2. Clone the project and navigate to the root directory of the project by command line/terminal
+3. Install the project dependancies:
+    npm i
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To enable PWA downloads and the accompanying functionality such as local device storage access to delete photos from device after upload, you must generate and install local CA certificates.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Local CA Setup:
+1. Install MKCert and OpenSSL
+    choco install openssl -y
+    choco install mkcert -y
+2. Install local CA
+    mkcert -install
+3. Generate Certificates
+    mkcert [hostname] [ip] 
+    ie. mkcert localhost 10.0.0.105
+4. Generate CRT from Certificates
+    openssl x509 -in rootCA.pem -out rootCA.crt
+5. Add certificate files (.pem and -key.pem) to the root folder of the project, and add the .crt to the root of /public for user downloads
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ENV file must contain:
+UPLOAD_DIR                  Network drive as it is mapped on the server host, as well as optional destination path. Must end in /   ie. S:/ or X:/Uploads/
+PORT                        Port to run application on                                                                              ie. 3000 or 8080
+HOST                        IP of server host                                                                                       ie. 10.0.0.105
+KEY                         location/filename of SSL key                                                                            ie. localhost+1-key.pem if stored in root directory
+PEM                         location/filename of SSL cert                                                                           ie. localhost+1.pem if stored in root directory

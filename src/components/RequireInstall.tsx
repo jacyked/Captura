@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 declare global {
   interface Navigator {
@@ -65,7 +66,14 @@ export default function RequireInstall({ children }: Props) {
   // iOS overlay
   if (showOverlay && isIos) {
     return (
-      <div className="fixed inset-0 z-50 bg-gray-900 text-white flex flex-col items-center justify-center p-6">
+      <div className="fixed inset-0 z-50 bg-gray-900 text-white flex flex-col items-center justify-center p-6 gap-4">
+        <Image 
+                  src="/CLogo_Transparent_Shadow.png"
+                  width={100}
+                  height={100}
+                  priority={true}
+                  
+                  alt="CapturA Logo"/>
         <h2 className="text-2xl font-bold mb-4">Install CapturA</h2>
         <p className="mb-6 text-center">
           In Safari, tap the <strong>Share</strong> icon then select{' '}
@@ -84,7 +92,14 @@ export default function RequireInstall({ children }: Props) {
   // Android/Chrome overlay
   if (showOverlay && deferredPrompt) {
     return (
-      <div className="fixed inset-0 z-50 bg-gray-900 text-white flex flex-col items-center justify-center p-6">
+      <div className="fixed inset-0 z-50 bg-gray-900 text-white flex flex-col items-center justify-center p-6 gap-4">
+        <Image 
+                  src="/CLogo_Transparent_Shadow.png"
+                  width={100}
+                  height={100}
+                  priority={true}
+                  
+                  alt="CapturA Logo"/>
         <h2 className="text-2xl font-bold mb-4">Install CapturA</h2>
         <button
           onClick={async () => {
@@ -97,7 +112,7 @@ export default function RequireInstall({ children }: Props) {
           }}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded text-lg"
         >
-          Install App
+          Install
         </button>
       </div>
     );

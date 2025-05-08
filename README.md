@@ -26,8 +26,8 @@ Local CA Setup:
 
 ENV file must contain:
 
-UPLOAD_DIR - Network drive as it is mapped on the server host, as well as optional destination path. Must end in / - ie. S:/ or X:/Uploads/
-PORT - Port to run application on - ie. 3000 or 8080
-HOST - IP of server host - ie. 10.0.0.105
-KEY - location/filename of SSL key - ie. localhost+1-key.pem if stored in root directory
-PEM - location/filename of SSL cert - ie. localhost+1.pem if stored in root directory
+- UPLOAD_DIR: Network drive as it is mapped on the server host, as well as optional destination path. Must end in / (ie. S:/ or X:/Uploads/)
+- PORT: Port to run application on (ie. 3000 or 8080)
+- HOST: IP of server host (ie. 10.0.0.105)
+- KEY: location/filename of SSL key (ie. localhost+1-key.pem if stored in root directory)
+- PEM: location/filename of SSL cert (ie. localhost+1.pem if stored in root directory)

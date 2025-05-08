@@ -19,7 +19,9 @@ Local CA Setup:
     mkcert [hostname] [ip] 
     ie. mkcert localhost 10.0.0.105
 4. Generate CRT from Certificates
-    openssl x509 -in rootCA.pem -out rootCA.crt
+    mkcert -CAROOT
+    Navigate to path returned and run
+    openssl x509 -in rootCA.pem -outform DER -out rootCA.crt
 5. Add certificate files (.pem and -key.pem) to the root folder of the project, and add the .crt to the root of /public for user downloads
 
 ENV file must contain:

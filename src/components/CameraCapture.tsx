@@ -19,11 +19,24 @@ export default function CameraCapture({ onCapture, onClose }: Props) {
   const [isClicked, setIsClicked] = useState(false);
   const [cameraMode, setCameraMode] = useState<'environment'|'user'>('environment');
   const [hasFrontCamera, setHasFrontCamera] = useState(false);
+  const [orientation, setOrientation] = useState<'portrait' | 'landscape'>(typeof window !== 'undefined' && window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
 
 
   // Load or prompt for folder handle
   useEffect(() => {
     loadHandle('uploads-dir').then(h => h ? setDirHandle(h) : pickFolder());
+  }, []);
+
+  useEffect(() => {
+    const update = () => {
+      setOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+    };
+    window.addEventListener('resize', update);
+    window.addEventListener('orientationchange', update);
+    return () => {
+      window.removeEventListener('resize', update);
+      window.removeEventListener('orientationchange', update);
+    };
   }, []);
 
   // Start camera
@@ -142,7 +155,7 @@ export default function CameraCapture({ onCapture, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black flex flex-col">
+    <div className="fixed inset-0 z-50 bg-black flex flex-col overflow-hidden" data-orientation={orientation}>
       
       {/* Flash overlay */}
       {isFlashing && (
@@ -164,12 +177,18 @@ export default function CameraCapture({ onCapture, onClose }: Props) {
         autoPlay
         muted
         playsInline
-        className="flex-1 w-full object-cover pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none transition-transform"
+        style={{
+          transform: orientation === 'landscape'
+            ? 'rotate(90deg) translateX(100%)'
+            : 'none',
+            transformOrigin: 'top left',
+        }}
       />
 
       {/* Shutter button */}
-      <div className="p-4 flex justify-center items-center">
-        <div className="bottom-4 top-4 flex w-20 h-20 items-center justify-center">
+      <div className="absolute m-auto bottom-4 left-0 right-0 w-20 h-20 rounded-full z-50">
+        <div className=" flex w-20 h-20 items-center justify-center">
         <button
           type="button"
           onClick={takePhoto}

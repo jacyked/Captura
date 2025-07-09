@@ -10,11 +10,6 @@ import { Camera, Folder } from 'lucide-react';
 //import DeleteFilesButton from './DeleteFilesButton';
 
 
-
-//TODO HEIC photo handling
-
-//Photos taking properly, need to display taken photos in app
-
 const UploadForm = () => {
     const [files, setFiles] = useState([]);
     const [ uploadStatus , setStatus] = useState('init');
@@ -126,17 +121,17 @@ const UploadForm = () => {
               <UploadResult uploadStatus={uploadStatus} failed={failed} progress={progress} uploaded={uploaded} installed={isInstalled}/>
             </div>
 
-            <form className="m-2 flex flex-col gap-2 items-center border p-4 bg-gray-900 border-gray-600 rounded-md w-5/6 md:w-96" onSubmit={handleSubmit}>
+            <form className="m-2 flex flex-col gap-2 items-center p-4 bg-gray-900 shadow-md rounded-md w-5/6 md:w-96" onSubmit={handleSubmit}>
                 <div className="flex flex-col w-full">
                     <label >RO Number: </label>
-                    <input className="border  border-gray-500 rounded p-2" type="text" id="ro" onChange={handleROChange} required />
+                    <input className="bg-gray-700 inset-shadow-xs rounded p-2" type="text" id="ro" onChange={handleROChange} required />
                 </div>
                 <div className="flex flex-col w-full">
                     <div className="flex space-x-2 justify-center mb-4">
-                        <label htmlFor="fileInput" className="btn flex items-center px-4 py-2 rounded border border-gray-500 text-sm">
+                        <label htmlFor="fileInput" className="btn flex items-center px-4 py-2 rounded bg-blue-400 shadow-md text-sm">
                           <Folder className="w-5 h-5 mr-2" /> From Folder
                         </label>
-                        <button type="button" onClick={()=>setMode('camera')} className="btn flex items-center rounded px-4 py-2 border border-gray-500 text-sm">
+                        <button type="button" onClick={()=>setMode('camera')} className="btn flex items-center rounded px-4 py-2 bg-blue-400 shadow-md text-sm">
                           <Camera className="w-5 h-5 mr-2" /> From Camera
                         </button>
                     </div>
@@ -167,7 +162,7 @@ const UploadForm = () => {
                       return (
                         <div
                           key={index}
-                          className="relative border border-gray-600 rounded overflow-hidden cursor-pointer"
+                          className="relative border border-gray-800 shadow-lg rounded overflow-hidden cursor-pointer"
                           style={{ paddingBottom: '100%'}}
                           onClick={() => handleOpenLightbox(file)}
                         >
